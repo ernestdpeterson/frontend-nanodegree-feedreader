@@ -32,15 +32,31 @@ $(function() {
          * and that the URL is not empty.
          */
 
+        it('defines url of feed', function() {
+            for (var i = allFeeds.length - 1; i >= 0; i--) {
+                expect(allFeeds[i].url).toBeDefined();
+                expect(allFeeds[i].url.length).not.toBe(0);
+            }
+        });
+
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+
+        it('defines name of feed', function() {
+            for (var i = allFeeds.length - 1; i >= 0; i--) {
+                expect(allFeeds[i].name).toBeDefined();
+                expect(allFeeds[i].name.length).not.toBe(0);
+            }
+        });
     });
 
 
     /* TODO: Write a new test suite named "The menu" */
+    describe('The menu', function() {
+        
 
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -48,13 +64,26 @@ $(function() {
          * hiding/showing of the menu element.
          */
 
+        it('hides by default', function() {
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+        });
+
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
 
+        it('toggles', function() {
+            $('body').toggleClass('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+            $('body').toggleClass('menu-hidden');
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+        });
+    });
+
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe('Initial Entries', function() {
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -63,10 +92,38 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
+        beforeEach(function(done) {
+            loadFeed(done());
+        });
+
+        it('has at least one entry', function(done) {
+            var someDiv = document.querySelectorAll('.feed', '.entry-link', '.entry');
+            expect(someDiv.length).toBe(1);
+            done();
+        });
+
+    });
+
     /* TODO: Write a new test suite named "New Feed Selection" */
+    describe('New Feed Selection', function() {
 
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+
+        beforeEach(function(done) {
+            loadFeed(0, done());
+            alert('this worked');
+        });
+
+        it('changes page content', function(done) {
+            setTimeout(function() {
+                var headerDiv = $('.header-title').html();
+                expect(headerDiv).not.toBe('Feeds');
+                done(); 
+            }, 1500);
+        });
+
+    });
 }());
