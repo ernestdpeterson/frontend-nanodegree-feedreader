@@ -93,13 +93,15 @@ $(function() {
          */
 
         beforeEach(function(done) {
-            loadFeed(done());
+            loadFeed(0, done());
         });
 
         it('has at least one entry', function(done) {
-            var someDiv = document.querySelectorAll('.feed', '.entry-link', '.entry');
-            expect(someDiv.length).toBe(1);
+            setTimeout(function() {
+            var someDiv = $('.feed').find('.entry-link');
+            expect(someDiv.length).not.toBe(0);
             done();
+            }, 1500);
         });
 
     });
@@ -114,7 +116,6 @@ $(function() {
 
         beforeEach(function(done) {
             loadFeed(0, done());
-            alert('this worked');
         });
 
         it('changes page content', function(done) {
