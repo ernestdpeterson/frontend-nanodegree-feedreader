@@ -97,7 +97,7 @@ $(function() {
         });
 
         it('has at least one entry', function(done) {
-            var someDiv = $('.feed .entry-link .entry');
+            var someDiv = $('.feed .entry');
             expect(someDiv.length).not.toBe(0);
             done();
         });
@@ -113,13 +113,14 @@ $(function() {
          */
 
         beforeEach(function(done) {
-            loadFeed(0, loadFeed(0, done));
+            loadFeed(0, loadFeed(1, done));
         });
 
         it('changes page content', function(done) {
-                var headerDiv = $('.feed').html();
-            console.log(headerDiv);
-                expect(headerDiv).not.toBe(undefined);
+                var feedContents = $('.feed .entry h2');
+                var feed1 = feedContents[0];
+                var feed2 = feedContents[1];
+                expect(feed1).not.toBe(feed2);
                 done(); 
         });
 
