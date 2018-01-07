@@ -75,9 +75,9 @@ $(function() {
           */
 
         it('toggles', function() {
-            $('body').toggleClass('menu-hidden');
+            $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(false);
-            $('body').toggleClass('menu-hidden');
+            $('.menu-icon-link').click();
             expect($('body').hasClass('menu-hidden')).toBe(true);
         });
     });
@@ -93,15 +93,13 @@ $(function() {
          */
 
         beforeEach(function(done) {
-            loadFeed(0, done());
+            loadFeed(0, done);
         });
 
         it('has at least one entry', function(done) {
-            setTimeout(function() {
-            var someDiv = $('.feed').find('.entry-link');
+            var someDiv = $('.feed .entry-link .entry');
             expect(someDiv.length).not.toBe(0);
             done();
-            }, 1500);
         });
 
     });
@@ -115,15 +113,14 @@ $(function() {
          */
 
         beforeEach(function(done) {
-            loadFeed(0, done());
+            loadFeed(0, loadFeed(0, done));
         });
 
         it('changes page content', function(done) {
-            setTimeout(function() {
-                var headerDiv = $('.header-title').html();
-                expect(headerDiv).not.toBe('Feeds');
+                var headerDiv = $('.feed').html();
+            console.log(headerDiv);
+                expect(headerDiv).not.toBe(undefined);
                 done(); 
-            }, 1500);
         });
 
     });
