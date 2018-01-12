@@ -115,11 +115,11 @@ $(function() {
         var feedArray = [];
 
         beforeEach(function(done) {
-            loadFeed(0, function() {
+            loadFeed(1, function() {
                 var firstFeed = $('.feed').html();
                 console.log(firstFeed);
                 feedArray.push(firstFeed);
-                loadFeed(1, function() {
+                loadFeed(0, function() {
                     feedArray.push($('.feed').html());
                     done();
                 })
@@ -128,7 +128,7 @@ $(function() {
 
         it('changes page content', function(done) {
                     console.log(feedArray[0]);
-                expect().not.toBe();
+                expect(feedArray[0]).not.toBe(feedArray[1]);
                 done(); 
         });
 
