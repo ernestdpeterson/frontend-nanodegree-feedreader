@@ -122,7 +122,7 @@ $(function() {
                 loadFeed(0, function() {
                     feedArray.push($('.feed').html());
                     done();
-                })
+                });
             });
         });
 
