@@ -112,15 +112,23 @@ $(function() {
          * Remember, loadFeed() is asynchronous.
          */
 
+        var feedArray = [];
+
         beforeEach(function(done) {
-            loadFeed(0, loadFeed(1, done));
+            loadFeed(0, function() {
+                var firstFeed = $('.feed').html();
+                console.log(firstFeed);
+                feedArray.push(firstFeed);
+                loadFeed(1, function() {
+                    feedArray.push($('.feed').html());
+                    done();
+                })
+            });
         });
 
         it('changes page content', function(done) {
-                var feedContents = $('.feed .entry h2');
-                var feed1 = feedContents[0];
-                var feed2 = feedContents[1];
-                expect(feed1).not.toBe(feed2);
+                    console.log(feedArray[0]);
+                expect().not.toBe();
                 done(); 
         });
 
